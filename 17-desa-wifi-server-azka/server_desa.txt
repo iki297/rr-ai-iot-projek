@@ -1,0 +1,41 @@
+# === SERVER DESA (rumah Pak Kades) ===
+# Raspberry Pi OS / Debian / Ubuntu
+
+# 1. Pasang broker MQTT (Mosquitto)
+sudo apt update
+sudo apt install -y mosquitto mosquitto-clients
+
+# 2. Buat akun MQTT untuk tiap warga
+sudo mosquitto_passwd -c /etc/mosquitto/passwd pakkades
+sudo mosquitto_passwd /etc/mosquitto/passwd azka
+sudo mosquitto_passwd /etc/mosquitto/passwd sanmey
+sudo mosquitto_passwd /etc/mosquitto/passwd rido
+sudo mosquitto_passwd /etc/mosquitto/passwd jepri
+sudo mosquitto_passwd /etc/mosquitto/passwd aca
+sudo mosquitto_passwd /etc/mosquitto/passwd sura
+
+# 3. Isi file /etc/mosquitto/conf.d/desa.conf
+listener 1883
+allow_anonymous false
+password_file /etc/mosquitto/passwd
+acl_file /etc/mosquitto/acl
+
+# 4. Isi file /etc/mosquitto/acl
+user pakkades
+topic readwrite desa/#
+pattern readwrite desa/%u/#
+
+sudo systemctl restart mosquitto
+
+# 5. Pasang Node-RED
+URL=https://github.com/node-red/linux-installers
+URL=$URL/releases/latest/download/install-update-nodered-deb
+bash <(curl -sL $URL)
+sudo systemctl enable --now nodered.service
+
+# === ROUTER HOTSPOT (MikroTik terminal) ===
+/ip hotspot setup
+/ip hotspot user profile add name=warga \
+    rate-limit=2M/2M shared-users=1
+/ip hotspot profile set [find] login-by=trial,http-chap \
+    trial-uptime-limit=1d trial-user-profile=warga
