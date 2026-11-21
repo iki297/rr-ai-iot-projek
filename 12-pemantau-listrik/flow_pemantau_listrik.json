@@ -1,0 +1,351 @@
+[
+ {
+  "id": "tab_listrik",
+  "type": "tab",
+  "label": "Pemantau Listrik",
+  "disabled": false,
+  "info": "PZEM-004T v3 -> ESP32 -> MQTT -> Node-RED"
+ },
+ {
+  "id": "broker1",
+  "type": "mqtt-broker",
+  "name": "Mosquitto",
+  "broker": "localhost",
+  "port": "1883",
+  "clientid": "",
+  "autoConnect": true,
+  "usetls": false,
+  "protocolVersion": "4",
+  "keepalive": "60",
+  "cleansession": true
+ },
+ {
+  "id": "mq_daya",
+  "type": "mqtt in",
+  "z": "tab_listrik",
+  "name": "listrik/daya",
+  "topic": "listrik/daya",
+  "qos": "0",
+  "datatype": "auto-detect",
+  "broker": "broker1",
+  "nl": false,
+  "rap": true,
+  "rh": 0,
+  "inputs": 0,
+  "x": 150,
+  "y": 120,
+  "wires": [
+   [
+    "num",
+    "dbg"
+   ]
+  ]
+ },
+ {
+  "id": "num",
+  "type": "change",
+  "z": "tab_listrik",
+  "name": "jadikan angka",
+  "rules": [
+   {
+    "t": "set",
+    "p": "payload",
+    "pt": "msg",
+    "to": "$number(payload)",
+    "tot": "jsonata"
+   }
+  ],
+  "x": 350,
+  "y": 120,
+  "wires": [
+   [
+    "gauge",
+    "chart",
+    "sw"
+   ]
+  ]
+ },
+ {
+  "id": "mq_energi",
+  "type": "mqtt in",
+  "z": "tab_listrik",
+  "name": "listrik/energi",
+  "topic": "listrik/energi",
+  "qos": "0",
+  "datatype": "auto-detect",
+  "broker": "broker1",
+  "nl": false,
+  "rap": true,
+  "rh": 0,
+  "inputs": 0,
+  "x": 150,
+  "y": 200,
+  "wires": [
+   [
+    "kwh"
+   ]
+  ]
+ },
+ {
+  "id": "ui_base",
+  "type": "ui-base",
+  "name": "Dashboard",
+  "path": "/dashboard",
+  "includeClientData": true,
+  "acceptsClientConfig": [
+   "ui-notification",
+   "ui-control"
+  ],
+  "showPathInSidebar": false,
+  "showPageTitle": true,
+  "titleBarStyle": "default"
+ },
+ {
+  "id": "ui_theme",
+  "type": "ui-theme",
+  "name": "Tema RR",
+  "colors": {
+   "surface": "#1e3a5f",
+   "primary": "#22d3ee",
+   "bgPage": "#eef1f6",
+   "groupBg": "#ffffff",
+   "groupOutline": "#cccccc"
+  },
+  "sizes": {
+   "pagePadding": "12px",
+   "groupGap": "12px",
+   "groupBorderRadius": "8px",
+   "widgetGap": "12px"
+  }
+ },
+ {
+  "id": "ui_page",
+  "type": "ui-page",
+  "name": "Listrik Rumah",
+  "ui": "ui_base",
+  "path": "/listrik",
+  "icon": "flash",
+  "layout": "grid",
+  "theme": "ui_theme",
+  "order": 1,
+  "className": "",
+  "visible": "true",
+  "disabled": "false"
+ },
+ {
+  "id": "ui_group",
+  "type": "ui-group",
+  "name": "Daya",
+  "page": "ui_page",
+  "width": "6",
+  "height": "1",
+  "order": 1,
+  "showTitle": true,
+  "className": "",
+  "visible": "true",
+  "disabled": "false"
+ },
+ {
+  "id": "gauge",
+  "type": "ui-gauge",
+  "z": "tab_listrik",
+  "name": "gauge daya",
+  "group": "ui_group",
+  "order": 1,
+  "width": 3,
+  "height": 3,
+  "gtype": "gauge-half",
+  "gstyle": "needle",
+  "title": "Daya",
+  "units": "W",
+  "icon": "",
+  "prefix": "",
+  "suffix": "",
+  "segments": [
+   {
+    "from": "0",
+    "color": "#5cd65c"
+   },
+   {
+    "from": "700",
+    "color": "#ffc800"
+   },
+   {
+    "from": "1000",
+    "color": "#ea5353"
+   }
+  ],
+  "min": 0,
+  "max": 2000,
+  "sizeThickness": 16,
+  "sizeGap": 4,
+  "sizeKeyThickness": 8,
+  "styleRounded": true,
+  "styleGlow": false,
+  "className": "",
+  "x": 580,
+  "y": 80,
+  "wires": []
+ },
+ {
+  "id": "kwh",
+  "type": "ui-text",
+  "z": "tab_listrik",
+  "group": "ui_group",
+  "order": 3,
+  "width": 3,
+  "height": 1,
+  "name": "total kWh",
+  "label": "Total energi (kWh)",
+  "format": "{{msg.payload}}",
+  "layout": "row-spread",
+  "style": false,
+  "className": "",
+  "x": 360,
+  "y": 200,
+  "wires": []
+ },
+ {
+  "id": "chart",
+  "type": "ui-chart",
+  "z": "tab_listrik",
+  "group": "ui_group",
+  "name": "chart daya",
+  "label": "Daya (W)",
+  "order": 2,
+  "chartType": "line",
+  "category": "topic",
+  "categoryType": "msg",
+  "xAxisLabel": "",
+  "xAxisProperty": "",
+  "xAxisPropertyType": "timestamp",
+  "xAxisType": "time",
+  "yAxisLabel": "W",
+  "yAxisProperty": "payload",
+  "yAxisPropertyType": "msg",
+  "ymin": "0",
+  "ymax": "",
+  "removeOlder": "1",
+  "removeOlderUnit": "3600",
+  "removeOlderPoints": "",
+  "width": 6,
+  "height": 4,
+  "className": "",
+  "x": 580,
+  "y": 120,
+  "wires": [
+   []
+  ]
+ },
+ {
+  "id": "sw",
+  "type": "switch",
+  "z": "tab_listrik",
+  "name": "switch > 1000",
+  "property": "payload",
+  "propertyType": "msg",
+  "rules": [
+   {
+    "t": "gt",
+    "v": "1000",
+    "vt": "num"
+   }
+  ],
+  "checkall": "true",
+  "repair": false,
+  "outputs": 1,
+  "x": 580,
+  "y": 180,
+  "wires": [
+   [
+    "dl"
+   ]
+  ]
+ },
+ {
+  "id": "dl",
+  "type": "delay",
+  "z": "tab_listrik",
+  "name": "1 pesan/10 mnt",
+  "pauseType": "rate",
+  "timeout": "5",
+  "timeoutUnits": "seconds",
+  "rate": "1",
+  "nbRateUnits": "10",
+  "rateUnits": "minute",
+  "randomFirst": "1",
+  "randomLast": "5",
+  "randomUnits": "seconds",
+  "drop": true,
+  "allowrate": false,
+  "outputs": 1,
+  "x": 790,
+  "y": 180,
+  "wires": [
+   [
+    "fn"
+   ]
+  ]
+ },
+ {
+  "id": "fn",
+  "type": "function",
+  "z": "tab_listrik",
+  "name": "susun pesan",
+  "func": "// ganti dengan chat ID Telegram kamu\nconst CHAT_ID = 123456789;\nmsg.payload = {\n    chatId: CHAT_ID,\n    type: \"message\",\n    content: \"Peringatan! Daya \" + msg.payload + \" W, lewat batas 1000 W.\"\n};\nreturn msg;",
+  "outputs": 1,
+  "timeout": 0,
+  "noerr": 0,
+  "initialize": "",
+  "finalize": "",
+  "libs": [],
+  "x": 990,
+  "y": 180,
+  "wires": [
+   [
+    "tg"
+   ]
+  ]
+ },
+ {
+  "id": "tgbot",
+  "type": "telegram bot",
+  "botname": "NamaBotKamu",
+  "usernames": "",
+  "chatids": "",
+  "baseapiurl": "",
+  "testenvironment": false,
+  "updatemode": "polling",
+  "pollinterval": "300",
+  "usesocks": false,
+  "sslterminated": false,
+  "verboselogging": false
+ },
+ {
+  "id": "tg",
+  "type": "telegram sender",
+  "z": "tab_listrik",
+  "name": "Telegram sender",
+  "bot": "tgbot",
+  "haserroroutput": false,
+  "outputs": 1,
+  "x": 1180,
+  "y": 180,
+  "wires": [
+   []
+  ]
+ },
+ {
+  "id": "dbg",
+  "type": "debug",
+  "z": "tab_listrik",
+  "name": "cek data",
+  "active": true,
+  "tosidebar": true,
+  "complete": "payload",
+  "targetType": "msg",
+  "x": 350,
+  "y": 60,
+  "wires": []
+ }
+]

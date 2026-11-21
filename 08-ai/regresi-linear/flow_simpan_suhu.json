@@ -1,0 +1,9 @@
+[
+  {"id": "rr_tab", "type": "tab", "label": "Simpan Suhu", "disabled": false, "info": ""},
+  {"id": "rr_in", "type": "mqtt in", "z": "rr_tab", "name": "rr/suhu", "topic": "rr/suhu", "qos": "0", "datatype": "auto-detect", "broker": "rr_broker", "nl": false, "rap": true, "rh": 0, "inputs": 0, "x": 130, "y": 120, "wires": [["rr_delay"]]},
+  {"id": "rr_delay", "type": "delay", "z": "rr_tab", "name": "1 data per jam", "pauseType": "rate", "timeout": "5", "timeoutUnits": "seconds", "rate": "1", "nbRateUnits": "1", "rateUnits": "hour", "randomFirst": "1", "randomLast": "5", "randomUnits": "seconds", "drop": true, "allowrate": false, "outputs": 1, "x": 320, "y": 120, "wires": [["rr_fn"]]},
+  {"id": "rr_fn", "type": "function", "z": "rr_tab", "name": "jadi baris CSV", "func": "// ubah pesan MQTT jadi satu baris: waktu,suhu\nconst suhu = Number(msg.payload);\nif (isNaN(suhu)) return null;\nconst waktu = new Date().toISOString().slice(0, 19);\nmsg.payload = waktu + \",\" + suhu.toFixed(1);\nreturn msg;", "outputs": 1, "timeout": 0, "noerr": 0, "initialize": "", "finalize": "", "libs": [], "x": 520, "y": 120, "wires": [["rr_file", "rr_dbg"]]},
+  {"id": "rr_file", "type": "file", "z": "rr_tab", "name": "suhu.csv", "filename": "/home/rizky/data/suhu.csv", "filenameType": "str", "appendNewline": true, "createDir": true, "overwriteFile": "false", "encoding": "none", "x": 720, "y": 100, "wires": [[]]},
+  {"id": "rr_dbg", "type": "debug", "z": "rr_tab", "name": "cek", "active": true, "tosidebar": true, "console": false, "tostatus": false, "complete": "payload", "targetType": "msg", "x": 710, "y": 160, "wires": []},
+  {"id": "rr_broker", "type": "mqtt-broker", "name": "Mosquitto", "broker": "localhost", "port": "1883", "clientid": "", "autoConnect": true, "usetls": false, "protocolVersion": "4", "keepalive": "60", "cleansession": true}
+]
