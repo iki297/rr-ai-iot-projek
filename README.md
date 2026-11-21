@@ -23,18 +23,7 @@ Kumpulan kode dari video pendek **RR – AI dan IoT Projek** (Instagram Reels, T
 
 ### Seri Desa Pintar Sukamaju
 
-| Folder | Proyek |
-|---|---|
-| [13-desa-stasiun-udara](13-desa-stasiun-udara/) | Desa Pintar #1: Stasiun Pemantau Udara |
-| [14-desa-lampu-jalan-otomatis](14-desa-lampu-jalan-otomatis/) | Desa Pintar #2: Lampu Jalan Otomatis |
-| [15-desa-sensor-banjir](15-desa-sensor-banjir/) | Desa Pintar #3: Sensor Peringatan Dini Banjir |
-| [16-desa-rumah-pintar](16-desa-rumah-pintar/) | Desa Pintar #4: Rumah Pintar |
-| [17-desa-wifi-server-azka](17-desa-wifi-server-azka/) | Wi-Fi Gratis & Server Desa (Kak Azka) |
-| [18-desa-prediksi-hujan-sanmey](18-desa-prediksi-hujan-sanmey/) | Prediksi Hujan (Kak Sanmey) |
-| [19-desa-pendingin-ruangan-rido](19-desa-pendingin-ruangan-rido/) | Pendingin Ruangan Otomatis (Kak Rido) |
-| [20-desa-rumah-mewah-jepri](20-desa-rumah-mewah-jepri/) | Rumah Mewah Serba Otomatis (Kak Jepri) |
-| [21-desa-robot-pembersih-aca](21-desa-robot-pembersih-aca/) | Robot Pembersih Rumah (Kak Aca) |
-| [22-desa-pompa-hidram-sura](22-desa-pompa-hidram-sura/) | Pompa Hidram + Keran Otomatis (Kak Sura) |
+Semua proyek seri Desa Pintar ada di folder [desa-pintar-sukamaju](desa-pintar-sukamaju/).
 
 ## Cara pakai
 - File `.ino`: buka di Arduino IDE, pilih board ESP32, install library yang disebut di README folder, isi WiFi/password/token, lalu upload.
