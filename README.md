@@ -21,9 +21,14 @@ Kumpulan kode dari video pendek **RR – AI dan IoT Projek** (Instagram Reels, T
 | [11-lampu-teras-otomatis](11-lampu-teras-otomatis/) | Lampu Teras Otomatis (Rizky) |
 | [12-pemantau-listrik](12-pemantau-listrik/) | Pemantau Listrik Rumah (Rizky) |
 
+### Seri Desa Pintar Sukamaju
+
+Semua proyek seri Desa Pintar ada di folder [desa-pintar-sukamaju](desa-pintar-sukamaju/).
+
 ## Cara pakai
 - File `.ino`: buka di Arduino IDE, pilih board ESP32, install library yang disebut di README folder, isi WiFi/password/token, lalu upload.
 - File `.json`: flow Node-RED, impor lewat menu Import di Node-RED.
-- File `.py`: jalankan dengan Python 3 (butuh pandas dan scikit-learn).
+- File `.py`: jalankan dengan Python 3 (butuh pandas dan scikit-learn; proyek prediksi hujan Kak Sanmey butuh statsmodels dan paho-mqtt).
+- File `.js` (seri Desa Pintar): tempel di function node Node-RED.
 
 Ada pertanyaan atau ide proyek? Komen di videonya!
