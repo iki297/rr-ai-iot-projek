@@ -20,6 +20,7 @@ Kumpulan kode dari video pendek **RR – AI dan IoT Projek** (Instagram Reels, T
 | [10-kotak-paket-pintar](10-kotak-paket-pintar/) | Kotak Paket Pintar (Sanmey) |
 | [11-lampu-teras-otomatis](11-lampu-teras-otomatis/) | Lampu Teras Otomatis (Rizky) |
 | [12-pemantau-listrik](12-pemantau-listrik/) | Pemantau Listrik Rumah (Rizky) |
+| [13-sensor-suhu-ke-iot](13-sensor-suhu-ke-iot/) | Dari Sensor ke IoT dalam 3 Langkah (Rizky) |
 
 ### Seri Desa Pintar Sukamaju
 
