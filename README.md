@@ -21,6 +21,7 @@ Kumpulan kode dari video pendek **RR – AI dan IoT Projek** (Instagram Reels, T
 | [11-lampu-teras-otomatis](11-lampu-teras-otomatis/) | Lampu Teras Otomatis (Rizky) |
 | [12-pemantau-listrik](12-pemantau-listrik/) | Pemantau Listrik Rumah (Rizky) |
 | [13-sensor-suhu-ke-iot](13-sensor-suhu-ke-iot/) | Dari Sensor ke IoT dalam 3 Langkah (Rizky) |
+| [14-humidifier-pintar](14-humidifier-pintar/) | Humidifier Pintar ESP32 (Sanmey) |
 
 ### Seri Desa Pintar Sukamaju
 
