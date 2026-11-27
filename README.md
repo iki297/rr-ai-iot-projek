@@ -24,6 +24,7 @@ Kumpulan kode dari video pendek **RR – AI dan IoT Projek** (Instagram Reels, T
 | [14-humidifier-pintar](14-humidifier-pintar/) | Humidifier Pintar ESP32 (Sanmey) |
 | [15-lampu-jalan-pintar](15-lampu-jalan-pintar/) | Lampu Jalan Pintar (Rizky) |
 | [16-akuaponik-iot](16-akuaponik-iot/) | Akuaponik IoT (Rizky) |
+| [17-penegur-jarak-nonton-tv](17-penegur-jarak-nonton-tv/) | Penegur Jarak Nonton TV (Rizky) |
 
 ### Seri Desa Pintar Sukamaju
 
